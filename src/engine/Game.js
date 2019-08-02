@@ -1,5 +1,3 @@
-import { observable, action } from "mobx";
-
 /*
 const gameProperties = require('../../gameProperties');
 const Scenario = require('../../engine/assets/Scenario');
@@ -14,7 +12,6 @@ const Konva = require('konva'); // Lib Canvas
 export default class Game {
 
   constructor() {
-    this.rootStore = rootStore
     /*
     // FPS Control
     this.fpsInterval = null; 

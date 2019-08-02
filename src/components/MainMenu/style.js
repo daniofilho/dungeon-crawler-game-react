@@ -26,8 +26,14 @@ export const DivMainMenu = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    .level-new-game { display: none; }
   }
   #mainMenu.show { display: flex; }
+  #mainMenu.new {
+    .level-menu { display: none; }
+    .level-new-game { display: block; }
+  }
 
     .new-game .menu-save { display: none; }
     .new-game .menu-continue { display: none; }
@@ -58,14 +64,14 @@ export const DivMainMenu = styled.div`
     }
     .menu li a {
       font-size: 14px;
-      color:#E9522C;
+      color:#FFF;
       text-decoration: none;
-      background: #FBD609;
-      border: 5px solid white;
+      background: #1F6096;
+      border: 5px solid #163D5C;
       box-shadow: 1px 1px 1px 3px #000;
       padding: 5px 15px;
       display: block;
-      border-radius: 30px;
+      border-radius: 0px;
       text-shadow: 2px 2px #000;
       line-height: 20px;
     }

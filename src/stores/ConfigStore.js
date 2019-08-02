@@ -1,16 +1,16 @@
 /* Store Relacioanda a interface */
-import { observable, action } from "mobx";
+import { decorate, observable, action } from "mobx";
 
 export class ConfigStore {
 
-    constructor(rootStore) {
-        this.rootStore = rootStore
-    }
+	constructor(rootStore) {
+		this.rootStore = rootStore
+	}
+	/*
+	@observable variavel = false; 
 
-    @observable variavel = false; 
-
-    @action setVariavel( _bool) {
-        this.variavel = _bool;
-    }
+	@action setVariavel( _bool) {
+		this.variavel = _bool;
+	}*/
 
 }

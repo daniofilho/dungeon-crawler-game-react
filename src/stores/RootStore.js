@@ -1,6 +1,6 @@
 // Agrupando as stores e compartilhando informações entre elas
 
-import Game from './engine/Game';
+import Game from '../engine/Game';
 
 import { ConfigStore } from "./ConfigStore";
 import { UiStore } from "./UiStore";
