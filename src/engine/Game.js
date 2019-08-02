@@ -1,3 +1,5 @@
+import { observable, action } from "mobx";
+
 /*
 const gameProperties = require('../../gameProperties');
 const Scenario = require('../../engine/assets/Scenario');
@@ -12,6 +14,7 @@ const Konva = require('konva'); // Lib Canvas
 export default class Game {
 
   constructor() {
+    this.rootStore = rootStore
     /*
     // FPS Control
     this.fpsInterval = null; 
@@ -73,6 +76,23 @@ export default class Game {
     this.initSound();
     */
   }
+
+  /*
+    # Variáveis
+  */
+
+    //@observable variavel = false; 
+
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  /*
+    # Funções
+  */
+ /*
+    @action setVariavel( _bool) {
+      this.variavel = _bool;
+    }*/
 /*
   initSound() {
     this.menuSound = new Howl({
