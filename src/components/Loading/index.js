@@ -4,17 +4,13 @@ import { DivLoading } from './style';
 
 export default class Loading extends Component {
 	render() {
+		const { isLoading } = this.context.state;
 		return (
-			<React.Fragment>
-				<GameContext.Consumer>
-					{(context) => (
-            <DivLoading id="loading" className={ context.state.isLoading ? 'show' : '' }>
-							<p>Loading</p>
-						</DivLoading>
-					)}
-				</GameContext.Consumer>
-			</React.Fragment>
-			
+			<DivLoading id="loading" className={ isLoading ? 'show' : '' }>
+				<p>Loading</p>
+			</DivLoading>
 		);
   }
 }
+
+Loading.contextType = GameContext;
