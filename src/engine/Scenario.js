@@ -1,15 +1,12 @@
-import React, { Component } from 'react';
-
 class Scenario {
 
   constructor(state){
+
     this.state = state;
 
     this.renderItems = [];
-
-    this.stage = null;
     
-    this.tileSize = 200;
+    this.tileSize = this.state.tileSize;
 
     this.sound = null;
     this.soundSrc = '';
@@ -17,8 +14,8 @@ class Scenario {
     this.initSound();
 
     // Rows and Collumns quantity
-    this.tilesColWidth = 30;
-    this.tilesColHeight = 30;
+    this.tilesColWidth  = this.state.horizontalTiles;
+    this.tilesColHeight = this.state.verticalTiles;
 
     this.initialX = Math.floor(this.tilesColWidth / 2);
     this.initialY = Math.floor(this.tilesColHeight / 2);
@@ -35,25 +32,23 @@ class Scenario {
 
   /* Scenario tiles */
   setupTiles = () => {
-    console.log(this.state);
     // Gen each frame based on sizes 
     let index = 0;
     for( let r=0; r<this.tilesColHeight;r++ ) {
       for( let c=0; c<this.tilesColWidth;c++ ) {
+        // Define position
         let x = this.tileSize * c;
         let y = this.tileSize * r;
+        //Check if is initial Tile
         let isInitial = ( c === this.initialX && r === this.initialY ) ? true : false;
-        let asset = this.state.getAsset( 'tile', { x:x, y:y, isInitial: isInitial } );
-        this.tiles[index] = { 
-          x: x,
-          y: y,
-          asset: asset
-        }
-        this.addRenderItem(asset);
+        // Generate component and add it to array of items
+        let tile = this.state.globalAssets.getAsset( 'tile', { x:x, y:y, isInitial: isInitial } );
+        this.tiles[index] = {  tile }
+        this.addRenderItem(tile);
         index++;
 
         if( isInitial ) {
-          this.initialTile = asset;
+          this.initialTile = tile;
         }
         
       }

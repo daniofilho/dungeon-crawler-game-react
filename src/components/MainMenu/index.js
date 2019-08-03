@@ -10,16 +10,19 @@ export default class MainMenu extends Component {
 
   render() {
 		const context = this.context;
+		const firstScreenStyle = {
+			display: context.state.fistScreenDisplay
+		}
 		return (
 			<DivMainMenu>
 							
-				<div id="first-screen">
+				<div id="first-screen" style={firstScreenStyle}>
 					<ul className="menu">
 						<li><a href="#!" id="start-game-button" onClick={context.logic.start}>Iniciar Jogo</a></li>
 					</ul>
 				</div>
 
-				<div id="mainMenu">
+				<div id="mainMenu" className={context.state.mainMenuClass}>
 
 					<ul className="menu level-menu">
 						<li><a href="#!" onClick={ () => { context.logic.mainMenu('menu-new') } }>Novo Jogo</a></li>
