@@ -8,15 +8,14 @@ export default class Tile extends Component {
     this.state = {
       width: this.props.gameProps.tileSize,
       height: this.props.gameProps.tileSize,
-      x: this.props.props.x,
-      y: this.props.props.y,
-      isInitial: this.props.props.isInitial,
-      content: false
+      x: this.props.componentProps.x,
+      y: this.props.componentProps.y,
+      isInitial: this.props.componentProps.isInitial
     }
   }
 
-  getCenterX() { return this.state.x + this.state.width / 2; }
-  getCenterY() { return this.state.y + this.state.height / 2; }
+  static getCenterX() { return this.state.x + this.state.width / 2; }
+  static getCenterY() { return this.state.y + this.state.height / 2; }
   
   setContent = (content) => {
     this.setState({content: content});
@@ -41,6 +40,7 @@ export default class Tile extends Component {
     }
     return (
       <DivTile 
+        ref={this.myRef}
         props={this.state}
         style= {style}
       >

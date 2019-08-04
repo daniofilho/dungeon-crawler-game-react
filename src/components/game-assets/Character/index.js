@@ -11,10 +11,11 @@ export default class Character extends Component {
     this.state = {
       charType: this.props.charType,
       charImage: char01_avatar,
-      x: this.props.x,
-      y: this.props.y
+      x: this.props.gameProps.charProps.x,
+      y: this.props.gameProps.charProps.y,
+      width: ( this.props.gameProps.tileSize * 0.5),
+      height: ( this.props.gameProps.tileSize * 0.5),
     }
-    this.setCharType(this.state.charType);
   }
   
   setCharType = (type) => {
@@ -27,6 +28,10 @@ export default class Character extends Component {
         this.setState({ charImage: char02_avatar });
         break;
     }
+  }
+
+  componentWillMount(){
+    this.setCharType(this.state.charType);
   }
 
 	render() {

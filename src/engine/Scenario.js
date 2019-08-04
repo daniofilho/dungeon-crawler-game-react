@@ -21,7 +21,7 @@ class Scenario {
     this.initialY = Math.floor(this.tilesColHeight / 2);
 
     this.initialTile = false;
-    this.actualTile = false;
+    this.initialTileProps = {};
 
     // The frames
     this.tiles = {};
@@ -48,12 +48,22 @@ class Scenario {
         index++;
 
         if( isInitial ) {
-          this.initialTile = tile;
+          this.setInitialStateProps(x, y);
         }
         
       }
     }
   }
+
+  setInitialStateProps = (x, y) => {
+    this.initialTileProps = {
+      x: x,
+      y: y,
+      centerX: x + this.state.tileSize / 2,
+      centerY: y + this.state.tileSize / 2
+    }
+  }
+  getInitialStateProps()  { return this.initialTileProps; }
 
   /* Sound */
   initSound() {

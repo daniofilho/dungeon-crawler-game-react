@@ -7,7 +7,6 @@ export const DivTile = styled.div`
   position: absolute;
   border: 1px solid rgba(0,0,0,0.2);
   background-image: url('${attr => (attr.props.isInitial) ? tile_open : tile_closed }');
-  background-repeat: repeat;
   transition: 0.2s;
 
   &:hover {

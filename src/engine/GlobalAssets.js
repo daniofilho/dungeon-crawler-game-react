@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Tile from '../components/game-assets/Tile'
-import Character from '../components/game-assets/Character'
+import Tile from '../components/game-assets/Tile';
 
 class GlobalAssets {
 
@@ -14,10 +13,7 @@ class GlobalAssets {
     switch( type ) {
       default:
       case 'tile':
-        r = <Tile props={props} gameProps={this.gameProps} />
-        break;
-      case 'char':
-        r = <Character props={props} gameProps={this.gameProps} />
+        r = <Tile componentProps={props} gameProps={this.gameProps} />
         break;
     }
     return r;
