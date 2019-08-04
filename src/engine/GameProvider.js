@@ -46,7 +46,7 @@ class GameProvider extends Component {
 				lifes: 0,
 				x: 800,
 				y: 800,
-				dices: {}
+				dices: []
 			},
 			
 			/* Scenario */
@@ -60,8 +60,11 @@ class GameProvider extends Component {
 
 			/* UI */
 			UIClassName: 'hide',
-			turn: 'rolar-dados',
-			turnLabel: 'Rolar Dados',
+
+			/* Turnos */
+			turn: '',
+				/* Rolagem Dados */
+				rolagensRestantes: 3,
 
 			/* Render */
 			renderItems: []
@@ -178,20 +181,61 @@ class GameProvider extends Component {
 		
 		/* Rolar Dados */
 			
-		//não está dando "reload", pq???
+			
 			rolarDados = () => {
+				if( this.state.rolagensRestantes > 0 ) {
+					let dices = [];
+					for( let i = 1; i<=6; i++) {
+						dices.push( Math.floor(Math.random() * 6) + 1 );
+					}
+					this.setState( prevState => ({
+						charProps: {
+							...prevState.charProps,
+							dices: dices
+						},
+						rolagensRestantes: this.state.rolagensRestantes - 1
+					}));
+				}
+			}
+			manterDados = () => {
+				this.setState( 
+					{
+						turn: 'acoes',
+						UIClassName: 'acoes'
+					}
+				);
+			}
+
+		/* - - - - - - */
+
+		/* Ações */
+
+			acoesEncerrar = () => {
+				this.setState( 
+					{
+						turn: 'monstros',
+						UIClassName: 'monstros'
+					}
+				);
+			}
+
+		/* - - - - - - */
+
+		/* Monstros */
+
+			monstrosEncerrar = () => {
+				let dices = [];
+				for( let i = 1; i<=6; i++) {
+					dices.push( Math.floor(Math.random() * 6) + 1 );
+				}
 				this.setState( prevState => ({
 					charProps: {
 						...prevState.charProps,
-						dices: {
-							0: Math.floor(Math.random() * 6) + 1,
-							1: Math.floor(Math.random() * 6) + 1,
-							2: Math.floor(Math.random() * 6) + 1,
-							3: Math.floor(Math.random() * 6) + 1,
-							4: Math.floor(Math.random() * 6) + 1,
-							5: Math.floor(Math.random() * 6) + 1
-						}
-					}
+						dices: dices
+					},
+					rolagensRestantes: 3,
+					turn: 'rolar-dados',
+					UIClassName: 'rolar-dados'
 				}));
 			}
 
@@ -216,6 +260,12 @@ class GameProvider extends Component {
 				charProps.x = initialTileProps.centerX;
 				charProps.y = initialTileProps.centerY; 
 
+				// Faz uma rolagem inicial de dados
+				let dices = [];
+				for( let i = 1; i<=6; i++) {
+					dices.push( Math.floor(Math.random() * 6) + 1 );
+				}
+
 				// # Set States and finish
 					this.setState(prevState => (
 						{
@@ -223,6 +273,7 @@ class GameProvider extends Component {
 								...prevState.charProps,
 								x: charProps.x,
 								y: charProps.y,
+								dices: dices
 							},
 							scenario: scenario,
 							initialTileProps: initialTileProps
@@ -238,7 +289,8 @@ class GameProvider extends Component {
 								{
 									renderItems: renderItems,
 									character: character,
-									UIClassName: 'rolar-dados'
+									UIClassName: 'rolar-dados',
+									turn: 'rolar-dados'
 								},
 								() => {
 									
@@ -264,7 +316,10 @@ class GameProvider extends Component {
 			start: this.start,
 			mainMenu: this.mainMenu,
 			getAsset: this.state.globalAssets.getAsset,
-			rolarDados: this.rolarDados
+			rolarDados: this.rolarDados,
+			manterDados: this.manterDados,
+			acoesEncerrar: this.acoesEncerrar,
+			monstrosEncerrar: this.monstrosEncerrar
 		}
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

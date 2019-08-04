@@ -8,11 +8,11 @@ export default class GameScenes extends Component {
     let renderItems = this.context.state.renderItems;
     if( ! Array.isArray( renderItems ) ) return;
     return (
-      <div>
+      <>
         {renderItems.map((value, index) => {
           return <div key={index}>{value}</div>
         })}
-      </div>
+      </>
     )
   }
 
