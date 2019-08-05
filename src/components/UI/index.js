@@ -8,12 +8,14 @@ import Turnos from './Turnos';
 export default class UI extends Component {
 
   renderDices() {
-    let dices = this.context.state.charProps.dices;
+    let props = this.context.state.charProps;
+    let li = [];
+    for( let index = 0; index<props.diceQty; index++) {
+      li.push( <li key={index}><Dice number={props.dices[index].value} /></li> );
+    }
     return (
       <ul className='dices'>
-        { dices.map( (value, index) => {
-          return ( <li key={index}><Dice number={value} /></li> );
-        })}
+        {li}
       </ul>
     );
   }

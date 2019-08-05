@@ -47,7 +47,7 @@ export const DivRolagemDados = styled.div`
           opacity:0.5;      
         }
 
-        input[type='checkbox']:checked + label {
+       label.true {
           opacity: 1;
         }
 

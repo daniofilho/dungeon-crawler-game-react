@@ -46,7 +46,15 @@ class GameProvider extends Component {
 				lifes: 0,
 				x: 800,
 				y: 800,
-				dices: []
+				diceQty: 6,
+				dices: [
+					{ value: -1, isUsed: false },
+					{ value: -1, isUsed: false },
+					{ value: -1, isUsed: false },
+					{ value: -1, isUsed: false },
+					{ value: -1, isUsed: false },
+					{ value: -1, isUsed: false },
+				]
 			},
 			
 			/* Scenario */
@@ -186,19 +194,12 @@ class GameProvider extends Component {
 		/* Roll Dices */
 			
 			getADiceRoll(keepIndex) {
-				let dices = [];
-				if( keepIndex ) {
-					this.state.charProps.dices.map( (value, index) => { 
-						if( keepIndex.includes(index) ) { //if has to keep this index
-							dices.push( this.state.charProps.dices[index] );
-						} else {//if not, gen a new one
-							dices.push( Math.floor(Math.random() * 6) + 1 );
-						}
-						return true;
-					});
-				} else {
-					for( let i = 1; i<=6; i++) {
-						dices.push( Math.floor(Math.random() * 6) + 1 );
+				let dices = {};
+				for( let index = 0; index<this.state.charProps.diceQty; index++) {
+					if( keepIndex && keepIndex.includes(index) ) {
+						dices[index] = this.state.charProps.dices[index];
+					} else {
+						dices[index] = { value: Math.floor(Math.random() * 6) + 1, isUsed: false };
 					}
 				}
 				return dices;
@@ -245,14 +246,10 @@ class GameProvider extends Component {
 		/* Monsters */
 
 			finishMonstersTurn = () => {
-				let dices = [];
-				for( let i = 1; i<=6; i++) {
-					dices.push( Math.floor(Math.random() * 6) + 1 );
-				}
 				this.setState( prevState => ({
 					charProps: {
 						...prevState.charProps,
-						dices: dices
+						dices: this.getADiceRoll()
 					},
 					rollsLeft: 3,
 					turn: 'rolar-dados',

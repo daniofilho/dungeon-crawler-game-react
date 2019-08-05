@@ -6,7 +6,20 @@ import Dice from '../../Dice';
 
 export default class RolagemDados extends Component {
   
+  defautlDiceCheck = {
+    0: {isChecked: false},
+    1: {isChecked: false},
+    2: {isChecked: false},
+    3: {isChecked: false},
+    4: {isChecked: false},
+    5: {isChecked: false},
+  };
+
   keepDicesIndex = [];
+
+  state = {
+    dicesChecked: this.defautlDiceCheck
+  }
 
   removeElement(array, value) {
     let newArray = [];
@@ -25,20 +38,38 @@ export default class RolagemDados extends Component {
     }
   }
 
+  checkChkBox = (index) => {
+    this.setState( prevState => ({
+      dicesChecked: {
+        ...prevState.dicesChecked,
+        [index]: {
+          isChecked: ! this.state.dicesChecked[index].isChecked
+        }
+      }
+    }));
+  }
+
+  labelOnClickHandle = (index) => {
+    this.keepDice(index);
+    this.checkChkBox(index);
+  }
+
   renderDices() {
-    let dices = this.context.state.charProps.dices;
+    let props = this.context.state.charProps;
+    let li = [];
+    for( let index = 0; index<props.diceQty; index++) {
+      li.push( 
+        <li key={index}>
+          <Dice number={ props.dices[index].value } />
+          <br/>
+          <input type="checkbox" id={ 'chk_dice_' + index} name="keep-dice" value={props.dices[index].value} defaultChecked={ this.state.dicesChecked[index].isChecked } />
+          <label className={ this.state.dicesChecked[index].isChecked + '' } onClick={ () => { this.labelOnClickHandle(index) } } >Manter</label>
+        </li> 
+      );
+    }
     return (
       <ul className='dices'>
-        { dices.map( (value, index) => {
-          return ( 
-            <li key={index}>
-              <Dice number={value} />
-              <br/>
-              <input type="checkbox" id={ 'chk_dice_' + index} name="keep-dice" value={value} defaultChecked={false} />
-              <label htmlFor={ 'chk_dice_' + index} onClick={ () => { this.keepDice(index) } } >Manter</label>
-            </li> 
-          );
-        })}
+        {li}
       </ul>
     );
   }
@@ -53,7 +84,8 @@ export default class RolagemDados extends Component {
   }
 
   onEndDiceTurn() {
-    console.log('ended!');
+    // Reset checkbox status for a new dice roll
+    this.setState({ dicesChecked: this.defautlDiceCheck });
   }
 
   render() {
