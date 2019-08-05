@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DivAcoes } from './style';
 import { GameContext } from '../../../../engine/GameProvider';
+import Button from '../../../Button';
 
 export default class Acoes extends Component {
   
@@ -13,10 +14,7 @@ export default class Acoes extends Component {
         <label>Ações</label>
 
         <div className="content">
-            <a href="#!" onClick={ () => { logic.acoesEncerrar() }}>
-              Encerrar<br/>
-              Turno
-            </a>
+          <Button theme={'blue'} onClick={ () => { logic.finishActionTurn() }} label={(<span>Encerrar<br/>Turno</span>)} />
         </div>
 
       </DivAcoes>

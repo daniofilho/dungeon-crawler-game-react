@@ -15,7 +15,7 @@ class GameProvider extends Component {
 			/* Debug */
 			debug: {
 				active: false,
-				autoLoad: false
+				autoLoad: true
 			},
 
 			/* Config */
@@ -61,16 +61,20 @@ class GameProvider extends Component {
 			/* UI */
 			UIClassName: 'hide',
 
-			/* Turnos */
+			/* Turns */
 			turn: '',
-				/* Rolagem Dados */
-				rolagensRestantes: 3,
+				/* Dices */
+				rollsLeft: 3222,
 
 			/* Render */
 			renderItems: []
 		}
 
 	/* Functions */
+
+		componentDidMount() {
+			if( this.state.debug.autoLoad ) this.start();
+		}
 		
 		start = () => {
 			this.setState(
@@ -164,7 +168,7 @@ class GameProvider extends Component {
 
 			updateScreenScroll = () => {
 				
-				if( this.state.mouseDown ) {
+				if( this.state.mouseDown && this.state.turn === 'acoes' ) {
 					document.body.style.cursor = 'grabbing';
 					let scrollX = this.state.mouseX - this.state.mouseX0;
 					let scrollY = this.state.mouseY - this.state.mouseY0;
@@ -179,38 +183,55 @@ class GameProvider extends Component {
 
 		/* - - - - - - */
 		
-		/* Rolar Dados */
+		/* Roll Dices */
 			
-			
-			rolarDados = () => {
-				if( this.state.rolagensRestantes > 0 ) {
-					let dices = [];
+			getADiceRoll(keepIndex) {
+				let dices = [];
+				if( keepIndex ) {
+					this.state.charProps.dices.map( (value, index) => { 
+						if( keepIndex.includes(index) ) { //if has to keep this index
+							dices.push( this.state.charProps.dices[index] );
+						} else {//if not, gen a new one
+							dices.push( Math.floor(Math.random() * 6) + 1 );
+						}
+						return true;
+					});
+				} else {
 					for( let i = 1; i<=6; i++) {
 						dices.push( Math.floor(Math.random() * 6) + 1 );
 					}
+				}
+				return dices;
+			}
+
+			rollDices = ( keepIndex ) => {
+				if( this.state.rollsLeft > 0 ) {
 					this.setState( prevState => ({
 						charProps: {
 							...prevState.charProps,
-							dices: dices
+							dices: this.getADiceRoll(keepIndex)
 						},
-						rolagensRestantes: this.state.rolagensRestantes - 1
+						rollsLeft: this.state.rollsLeft - 1
 					}));
 				}
 			}
-			manterDados = () => {
+			finishRollDiceTurn = (callback) => {
 				this.setState( 
 					{
 						turn: 'acoes',
 						UIClassName: 'acoes'
+					},
+					() => {
+						if(callback) callback();
 					}
 				);
 			}
 
 		/* - - - - - - */
 
-		/* Ações */
+		/* Actions */
 
-			acoesEncerrar = () => {
+			finishActionTurn = () => {
 				this.setState( 
 					{
 						turn: 'monstros',
@@ -221,9 +242,9 @@ class GameProvider extends Component {
 
 		/* - - - - - - */
 
-		/* Monstros */
+		/* Monsters */
 
-			monstrosEncerrar = () => {
+			finishMonstersTurn = () => {
 				let dices = [];
 				for( let i = 1; i<=6; i++) {
 					dices.push( Math.floor(Math.random() * 6) + 1 );
@@ -233,7 +254,7 @@ class GameProvider extends Component {
 						...prevState.charProps,
 						dices: dices
 					},
-					rolagensRestantes: 3,
+					rollsLeft: 3,
 					turn: 'rolar-dados',
 					UIClassName: 'rolar-dados'
 				}));
@@ -260,12 +281,6 @@ class GameProvider extends Component {
 				charProps.x = initialTileProps.centerX;
 				charProps.y = initialTileProps.centerY; 
 
-				// Faz uma rolagem inicial de dados
-				let dices = [];
-				for( let i = 1; i<=6; i++) {
-					dices.push( Math.floor(Math.random() * 6) + 1 );
-				}
-
 				// # Set States and finish
 					this.setState(prevState => (
 						{
@@ -273,7 +288,7 @@ class GameProvider extends Component {
 								...prevState.charProps,
 								x: charProps.x,
 								y: charProps.y,
-								dices: dices
+								dices: this.getADiceRoll()
 							},
 							scenario: scenario,
 							initialTileProps: initialTileProps
@@ -313,13 +328,22 @@ class GameProvider extends Component {
 	/* Functions Object */
 
 		logicObj = {
+			
+			/* common */
+			getAsset: this.state.globalAssets.getAsset,
+
+			/* menu */
 			start: this.start,
 			mainMenu: this.mainMenu,
-			getAsset: this.state.globalAssets.getAsset,
-			rolarDados: this.rolarDados,
-			manterDados: this.manterDados,
-			acoesEncerrar: this.acoesEncerrar,
-			monstrosEncerrar: this.monstrosEncerrar
+			
+			/* dices */
+			rollDices: this.rollDices,
+			
+			/* turns */
+			finishRollDiceTurn: this.finishRollDiceTurn,
+			finishActionTurn: this.finishActionTurn,
+			finishMonstersTurn: this.finishMonstersTurn
+			
 		}
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */

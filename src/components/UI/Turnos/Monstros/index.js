@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { DivMonstros } from './style';
 import { GameContext } from '../../../../engine/GameProvider';
+import Button from '../../../Button';
 
 export default class Monstros extends Component {
   
@@ -13,10 +14,7 @@ export default class Monstros extends Component {
         <label>Monstros</label>
 
         <div className="content">
-            <a href="#!" onClick={ () => { logic.monstrosEncerrar() }}>
-              Encerrar<br/>
-              Turno
-            </a>
+          <Button theme={'blue'} onClick={ () => { logic.finishMonstersTurn() }} label={(<span>Encerrar<br/>Turno</span>)} />
         </div>
 
       </DivMonstros>

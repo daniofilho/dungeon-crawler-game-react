@@ -5,11 +5,7 @@ export const DivRolagemDados = styled.div`
   opacity: 0.4;
   &.rolar-dados { opacity: 1; }
 
-  &.rolar-dados > label { font-size: 30px; }
-
   &.rolar-dados .rolagem-dados { display: block; }
-  
-
   .rolagem-dados {
     display: none;
     width: 80vw;
@@ -33,13 +29,28 @@ export const DivRolagemDados = styled.div`
         }
 
         input[type='checkbox'] { display: none; }
+        
         label {
           display: block;
           cursor: pointer;
+          font-size: 12px;
+          text-decoration: none;
+          padding: 5px 15px;
+          display: block;
+          border-radius: 0px;
+          line-height: 20px; 
+          color: #FFFFFF;
+          background-color: #1F6096;
+          border: 5px solid #163D5C;
+          text-shadow: 2px 2px #000;
+          box-shadow: 1px 1px 1px 0px #000; 
+          opacity:0.5;      
         }
+
         input[type='checkbox']:checked + label {
-          color: green;
+          opacity: 1;
         }
+
       }
     }
 
@@ -49,19 +60,6 @@ export const DivRolagemDados = styled.div`
       bottom: 0;
       text-align: center;
       padding: 40px;
-      a {
-        font-size: 14px;
-        color:#FFF;
-        text-decoration: none;
-        background: #1F6096;
-        border: 5px solid #163D5C;
-        box-shadow: 1px 1px 1px 3px #000;
-        padding: 5px 15px;
-        display: block;
-        border-radius: 0px;
-        text-shadow: 2px 2px #000;
-        line-height: 20px;
-      }
     }
 
   }  

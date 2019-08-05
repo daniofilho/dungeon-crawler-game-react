@@ -6,12 +6,8 @@ export const DivMonstros = styled.div`
   &.monstros { opacity: 1; }
 
   &.monstros .content { display: block; }
-  &.monstros label {
-    font-size: 30px;
-  }
-  .content { display: none; }
-
   .content {
+    display: none;
     position: fixed;
     right: 10px;
     top: 10px;

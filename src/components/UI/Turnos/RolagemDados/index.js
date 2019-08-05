@@ -1,11 +1,30 @@
 import React, { Component } from 'react';
 import { DivRolagemDados } from './style';
 import { GameContext } from '../../../../engine/GameProvider';
-
+import Button from '../../../Button';
 import Dice from '../../Dice';
 
 export default class RolagemDados extends Component {
   
+  keepDicesIndex = [];
+
+  removeElement(array, value) {
+    let newArray = [];
+    array.map ( v => {
+      if( v !== value ) newArray.push( v );
+      return true;
+    });
+    return newArray;
+  }
+
+  keepDice = ( index ) => {
+    if( this.keepDicesIndex.includes(index) ) {
+      this.keepDicesIndex = this.removeElement( this.keepDicesIndex, index );
+    } else {
+      this.keepDicesIndex.push(index);
+    }
+  }
+
   renderDices() {
     let dices = this.context.state.charProps.dices;
     return (
@@ -14,13 +33,27 @@ export default class RolagemDados extends Component {
           return ( 
             <li key={index}>
               <Dice number={value} />
-              {/*<br/>
-              <input type="checkbox" id={ 'chk_dice_' + index} name="keep-dice" value={value} />
-              <label htmlFor={ 'chk_dice_' + index}>Manter</label>*/}
-            </li> );
+              <br/>
+              <input type="checkbox" id={ 'chk_dice_' + index} name="keep-dice" value={value} defaultChecked={false} />
+              <label htmlFor={ 'chk_dice_' + index} onClick={ () => { this.keepDice(index) } } >Manter</label>
+            </li> 
+          );
         })}
       </ul>
     );
+  }
+
+  labelRerollDice() {
+    return(
+      <span>
+        Rerolar Dados! <br/> 
+        <small>restam: {this.context.state.rollsLeft}</small>
+      </span>
+    );
+  }
+
+  onEndDiceTurn() {
+    console.log('ended!');
   }
 
   render() {
@@ -36,16 +69,9 @@ export default class RolagemDados extends Component {
           {this.renderDices()}
 
           <div className="button">
-            
-            <a href="#!" onClick={ () => { logic.rolarDados() }}>
-              Rerolar Dados! <br/> 
-              <small>restam: {props.rolagensRestantes}</small>
-            </a>
-
-            <a href="#!" onClick={ () => { logic.manterDados() }}>
-              Ficar com esses dados
-            </a>
-
+            <Button theme={'red'} onClick={ () => { logic.rollDices( this.keepDicesIndex ) }} label={ this.labelRerollDice() } />
+            <br/>
+            <Button theme={'blue'} onClick={ () => { logic.finishRollDiceTurn( this.onEndDiceTurn() ) }} label={'Ficar com esses dados'} />
           </div>
 
         </div>
