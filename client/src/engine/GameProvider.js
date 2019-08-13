@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import api from '../services/api';
+
 import { Scenario } from './Scenario';
 import { GlobalAssets } from './GlobalAssets';
 
