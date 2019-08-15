@@ -6,6 +6,7 @@ import Loading from '../Loading/index';
 import Button from '../Button';
 
 import LevelNewGame from './level-new-game';
+import LevelMultiplayer from './level-multiplayer';
 
 export default class MainMenu extends Component {
 
@@ -29,12 +30,15 @@ export default class MainMenu extends Component {
 
 					<ul className="menu level-menu">
 						<li><Button theme={'blue'} onClick={ () => { context.logic.mainMenu('menu-new') }} label={'Novo Jogo'} /></li>
+						<li><Button theme={'blue'} onClick={ () => { context.logic.mainMenu('multiplayer') }} label={'Multijogador'} /></li>
 						<li><Button theme={'blue'} onClick={ () => { context.logic.mainMenu('load') } } label={'Carregar Jogo'} /></li>
 						<li><Button theme={'blue'} onClick={ () => { context.logic.mainMenu('instructions') } } label={'Instruções'} /></li>
 						<li><Button theme={'blue'} onClick={ () => { context.logic.mainMenu('credits') } } label={'Créditos'} /></li>
 					</ul>
 		
 					<LevelNewGame />
+
+					<LevelMultiplayer />
 
 				</div>
 

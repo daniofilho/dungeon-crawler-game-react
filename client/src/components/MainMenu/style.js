@@ -28,11 +28,21 @@ export const DivMainMenu = styled.div`
     flex-direction: column;
 
     .level-new-game { display: none; }
+    .level-multiplayer { display: none; }
   }
   #mainMenu.show { display: flex; }
   #mainMenu.new {
     .level-menu { display: none; }
     .level-new-game { display: block; }
+    .level-multiplayer { display: none; }
+  }
+  #mainMenu.multiplayer {
+    .level-menu { display: none; }
+    .level-new-game { display: none; }
+    .level-multiplayer { display: block; }
+  }
+  .level-multiplayer {
+    
   }
 
     .new-game .menu-save { display: none; }

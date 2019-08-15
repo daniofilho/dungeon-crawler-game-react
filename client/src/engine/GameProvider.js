@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import api from '../services/api';
+import io from 'socket.io-client';
+//import api from '../services/api';
 
 import { Scenario } from './Scenario';
 import { GlobalAssets } from './GlobalAssets';
@@ -10,17 +10,21 @@ import Character from '../components/game-assets/Character';
 const GameContext = React.createContext();
 
 class GameProvider extends Component {
-	
+
+	socket = false;
+
 	/* constructor */
 
 		state = {
+
 			/* Debug */
 			debug: {
 				active: false,
-				autoLoad: true
+				autoLoad: false
 			},
 
 			/* Config */
+			username: null,
 			tileSize: 150, //px - resolution
     	horizontalTiles: 20,
 			verticalTiles: 20,
@@ -112,6 +116,9 @@ class GameProvider extends Component {
 					case 'menu-new':
 						this.setState({ mainMenuClass: 'show new' });
 						break;
+					case 'multiplayer':
+						this.setState({ mainMenuClass: 'show multiplayer' });
+						break;
 					case 'new':
 						this.setState({ mainMenuClass: ''});
 						this.loading(true);
@@ -192,6 +199,18 @@ class GameProvider extends Component {
 			}
 
 		/* - - - - - - */
+
+		/* Username */
+			getUsername = () => {
+				return this.state.username;
+			}
+			setUsername = (username) => {
+				this.setState({
+					username: username
+				})
+			}
+
+		/* - - - - - - */
 		
 		/* Roll Dices */
 			
@@ -257,6 +276,38 @@ class GameProvider extends Component {
 					turn: 'rolar-dados',
 					UIClassName: 'rolar-dados'
 				}));
+			}
+
+		/* - - - - - - */
+
+		/* Server */	
+
+			conn = () => {
+				this.socket = io('http://localhost:3333', {
+					query: { clientID: this.state.username }
+				});
+			}
+
+			createHost = () => {	
+				if( this.state.username !== null ) {
+					this.conn();
+					this.socket.emit('create-host');
+					this.setState({ mainMenuClass: 'show multiplayer create-host' });
+				} else {
+					alert('Digite o nome de usuário antes.');
+				}
+			}
+
+			joinHost = (action, param) => {
+				switch(action) {
+					default:
+					case 'menu':
+						this.setState({ mainMenuClass: 'show multiplayer join-host' });
+						break;
+					case 'init':
+
+						break;
+				}
 			}
 
 		/* - - - - - - */
@@ -331,9 +382,16 @@ class GameProvider extends Component {
 			/* common */
 			getAsset: this.state.globalAssets.getAsset,
 
+			/* username */
+			setUsername: this.setUsername,
+
 			/* menu */
 			start: this.start,
 			mainMenu: this.mainMenu,
+
+			/* server */
+			createHost: this.createHost,
+			joinHost: this.joinHost,
 			
 			/* dices */
 			rollDices: this.rollDices,

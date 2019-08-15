@@ -30,7 +30,7 @@ export default class Character extends Component {
     }
   }
 
-  componentWillMount(){
+  componentDidMount(){
     this.setCharType(this.state.charType);
   }
 
