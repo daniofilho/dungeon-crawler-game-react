@@ -23,11 +23,13 @@ module.exports = {
     // Seta um novo Host
     hosts[hostCode] = {
       canJoin: true,
-      users: {
-        username: username,
-        isHost: true,
-        props: {}
-      },
+      users: [
+        {
+          username: username,
+          isHost: true,
+          props: {}
+        }
+      ],
       simpleUsers: [username]
     };
 
@@ -63,14 +65,20 @@ module.exports = {
 
           // Adiciona usuário na sala
           hosts[hostCode].simpleUsers.push(username);
+          hosts[hostCode].users.push({
+            username: username,
+            isHost: false,
+            props: {}
+          });
 
           // Avisa todos os usuários que há um novo usuário
-          /*
-          io.to(connectedUsers[username].socketId).emit(
-      "host-users-updated",
-      hosts[hostCode].simpleUsers
-    );
-     */
+          for (let i = 0; i < hosts[hostCode].users.length; i++) {
+            user = hosts[hostCode].users[i];
+            io.to(connectedUsers[user.username].socketId).emit(
+              "host-users-updated",
+              hosts[hostCode].simpleUsers
+            );
+          }
 
           console.log(`\n# ${username} entrou na sala >${hostCode}<`);
         } else {
@@ -81,7 +89,7 @@ module.exports = {
       }
     }
 
-    console.log({ operationSucceded, message, username, hostCode });
+    //console.log({ operationSucceded, message, username, hostCode });
 
     // "Retorno" da operação
     io.to(connectedUsers[username].socketId).emit("join-host-finished", {
