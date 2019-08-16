@@ -1,21 +1,20 @@
 class Scenario {
-
-  constructor(state){
-
+  constructor(state, vars) {
     this.state = state;
+    this.vars = vars;
 
     this.renderItems = [];
-    
-    this.tileSize = this.state.tileSize;
+
+    this.tileSize = this.vars.tileSize;
 
     this.sound = null;
-    this.soundSrc = '';
+    this.soundSrc = "";
 
     this.initSound();
 
     // Rows and Collumns quantity
-    this.tilesColWidth  = this.state.horizontalTiles;
-    this.tilesColHeight = this.state.verticalTiles;
+    this.tilesColWidth = this.vars.horizontalTiles;
+    this.tilesColHeight = this.vars.verticalTiles;
 
     this.initialX = Math.floor(this.tilesColWidth / 2);
     this.initialY = Math.floor(this.tilesColHeight / 2);
@@ -27,43 +26,48 @@ class Scenario {
     this.tiles = {};
 
     this.run();
-
   }
 
   /* Scenario tiles */
   setupTiles = () => {
-    // Gen each frame based on sizes 
+    // Gen each frame based on sizes
     let index = 0;
-    for( let r=0; r<this.tilesColHeight;r++ ) {
-      for( let c=0; c<this.tilesColWidth;c++ ) {
+    for (let r = 0; r < this.tilesColHeight; r++) {
+      for (let c = 0; c < this.tilesColWidth; c++) {
         // Define position
         let x = this.tileSize * c;
         let y = this.tileSize * r;
         //Check if is initial Tile
-        let isInitial = ( c === this.initialX && r === this.initialY ) ? true : false;
+        let isInitial =
+          c === this.initialX && r === this.initialY ? true : false;
         // Generate component and add it to array of items
-        let tile = this.state.globalAssets.getAsset( 'tile', { x:x, y:y, isInitial: isInitial } );
-        this.tiles[index] = {  tile }
+        let tile = this.vars.globalAssets.getAsset("tile", {
+          x: x,
+          y: y,
+          isInitial: isInitial
+        });
+        this.tiles[index] = { tile };
         this.addRenderItem(tile);
         index++;
 
-        if( isInitial ) {
+        if (isInitial) {
           this.setInitialStateProps(x, y);
         }
-        
       }
     }
-  }
+  };
 
   setInitialStateProps = (x, y) => {
     this.initialTileProps = {
       x: x,
       y: y,
-      centerX: x + this.state.tileSize / 2,
-      centerY: y + this.state.tileSize / 2
-    }
+      centerX: x + this.tileSize / 2,
+      centerY: y + this.tileSize / 2
+    };
+  };
+  getInitialStateProps() {
+    return this.initialTileProps;
   }
-  getInitialStateProps()  { return this.initialTileProps; }
 
   /* Sound */
   initSound() {
@@ -73,17 +77,20 @@ class Scenario {
       volume: 0.5
     });*/
   }
-  getScenarioSound() { return this.sound; }
+  getScenarioSound() {
+    return this.sound;
+  }
 
   // Render
-  addRenderItem(item){
+  addRenderItem(item) {
     this.renderItems.push(item);
   }
-  getRenderItems() { return this.renderItems; }
-  
+  getRenderItems() {
+    return this.renderItems;
+  }
+
   // Da scroll na tela para centralizar até o chunk central
   centerScreen() {
-    
     let x = this.initialX * this.tileSize;
     let y = this.initialY * this.tileSize;
 
@@ -91,18 +98,17 @@ class Scenario {
     let centerXY = this.tileSize / 2;
 
     // Quantos tiles cabem na tela?
-    let tilesWidth = (document.documentElement.clientWidth / this.tileSize);
-    let tilesHeight = (document.documentElement.clientHeight / this.tileSize);
+    let tilesWidth = document.documentElement.clientWidth / this.tileSize;
+    let tilesHeight = document.documentElement.clientHeight / this.tileSize;
 
-    x = x - ( this.tileSize * ( tilesWidth / 2 ) ) + centerXY;
-    y = y - ( this.tileSize * ( tilesHeight / 2 ) ) + centerXY;
-    
-    window.scrollTo( x, y );
+    x = x - this.tileSize * (tilesWidth / 2) + centerXY;
+    y = y - this.tileSize * (tilesHeight / 2) + centerXY;
+
+    window.scrollTo(x, y);
   }
 
-  run() { 
+  run() {
     this.setupTiles();
   }
-
-}//class
-export {Scenario}
+} //class
+export { Scenario };

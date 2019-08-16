@@ -2,31 +2,28 @@ const express = require("express");
 const routes = require("./routes");
 const cors = require("cors");
 
+const GameController = require("./controllers/GameController");
+
 // Cria o server
 const app = express(); // http
 const server = require("http").Server(app); // unindo o servidor para aceitar websocket E http
 const io = require("socket.io")(server);
 
-const connectedUsers = {};
-
+//ao receber conexão
 io.on("connection", socket => {
-  // quando vier conexão pelo socket
+  const { username } = socket.handshake.query;
 
-  const { clientID } = socket.handshake.query;
-  connectedUsers[clientID] = socket.id;
+  GameController.addNewConnectedUser(username, socket.id);
 
-  socket.on("create-host", () => {
-    console.log({ connectedUsers });
+  // Criar Host
+  socket.on("create-host", header => {
+    GameController.createHost(io, header);
   });
-});
 
-//middleware
-app.use((req, res, next) => {
-  // faz qq coisa com req e res e dps chama o next pra dar sequencia
-  req.io = io;
-  req.connectedUsers = connectedUsers;
-
-  return next();
+  // Join Host
+  socket.on("join-host", header => {
+    GameController.joinHost(io, header);
+  });
 });
 
 app.use(cors());

@@ -1,23 +1,28 @@
-import React from 'react';
+import React from "react";
 
-import Tile from '../components/game-assets/Tile';
+import Tile from "../components/game-assets/Tile";
 
 class GlobalAssets {
-
-  constructor(gameProps) { 
-    this.gameProps = gameProps;
+  constructor(gameState, gameVars) {
+    this.gameState = gameState;
+    this.gameVars = gameVars;
   }
 
-  getAsset = ( type, props, fromSaveState ) => {
+  getAsset = (type, props, fromSaveState) => {
     let r;
-    switch( type ) {
+    switch (type) {
       default:
-      case 'tile':
-        r = <Tile componentProps={props} gameProps={this.gameProps} />
+      case "tile":
+        r = (
+          <Tile
+            componentProps={props}
+            gameState={this.gameState}
+            gameVars={this.gameVars}
+          />
+        );
         break;
     }
     return r;
-  }
-
-}//class
-export { GlobalAssets }
+  };
+} //class
+export { GlobalAssets };

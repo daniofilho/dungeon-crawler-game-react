@@ -1,9 +1,11 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DivLevelMultiplayer = styled.div`
-  
-  h4 {
-    color: #FFF;
+  h4,
+  p,
+  span,
+  strong {
+    color: #fff;
   }
   .menu {
     display: flex;
@@ -12,9 +14,11 @@ export const DivLevelMultiplayer = styled.div`
     }
   }
 
-  .create-host,
-  .join-host {
-    display: none;
+  .logged-users {
+    li {
+      padding: 10px 0;
+      list-style: none;
+      color: #fff;
+    }
   }
-
 `;

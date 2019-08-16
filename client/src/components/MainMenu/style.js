@@ -1,7 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DivMainMenu = styled.div`
-
   #first-screen {
     display: flex;
     width: 100%;
@@ -27,50 +26,76 @@ export const DivMainMenu = styled.div`
     align-items: center;
     flex-direction: column;
 
-    .level-new-game { display: none; }
-    .level-multiplayer { display: none; }
+    .level-new-game {
+      display: none;
+    }
+    .level-multiplayer {
+      display: none;
+    }
   }
-  #mainMenu.show { display: flex; }
+  #mainMenu.show {
+    display: flex;
+  }
   #mainMenu.new {
-    .level-menu { display: none; }
-    .level-new-game { display: block; }
-    .level-multiplayer { display: none; }
+    .level-menu {
+      display: none;
+    }
+    .level-new-game {
+      display: block;
+    }
+    .level-multiplayer {
+      display: none;
+    }
   }
   #mainMenu.multiplayer {
-    .level-menu { display: none; }
-    .level-new-game { display: none; }
-    .level-multiplayer { display: block; }
+    .level-menu {
+      display: none;
+    }
+    .level-new-game {
+      display: none;
+    }
+    .level-multiplayer {
+      display: block;
+    }
   }
-  .level-multiplayer {
-    
+
+  .new-game .menu-save {
+    display: none;
+  }
+  .new-game .menu-continue {
+    display: none;
+  }
+  .paused .new-game .menu-continue {
+    display: block;
+  }
+  .paused .new-game .menu-save {
+    display: block;
+  }
+  .paused #controls,
+  .paused #mainMenu {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .paused #mainMenu .game-title {
+    display: none;
   }
 
-    .new-game .menu-save { display: none; }
-    .new-game .menu-continue { display: none; }
-    .paused .new-game .menu-continue { display: block ; }
-    .paused .new-game .menu-save { display: block; }
-    .paused  #controls,
-    .paused  #mainMenu{ background: rgba(0,0,0, 0.5); }
-    .paused #mainMenu .game-title { display: none; }
+  #mainMenu .game-title {
+    font-size: 40px;
+    color: #fff;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
 
-    #mainMenu .game-title {
-      font-size: 40px;
-      color: #FFF;
-      width: 100%;
-      margin-bottom: 20px;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    .menu { 
-      margin: 0;
-      padding: 0;
-    }
-    .menu li { 
-      width: 100%;
-      text-align: center;
-      list-style: none;
-      padding: 5px;
-    }
-
+  .menu {
+    margin: 0;
+    padding: 0;
+  }
+  .menu li {
+    width: 100%;
+    text-align: center;
+    list-style: none;
+    padding: 5px;
+  }
 `;
