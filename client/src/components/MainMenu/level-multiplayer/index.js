@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { GameContext } from "../../../engine/GameProvider";
-import { DivLevelMultiplayer } from "./style";
-import Button from "../../Button";
-import Input from "../../Input";
+import React, { Component } from 'react';
+import { GameContext } from 'engine/GameProvider';
+import { DivLevelMultiplayer } from './style';
+import Button from 'components/Button';
+import Input from 'components/Input';
 
 //import char01 from '../../../assets/sprites/char01-avatar.png';
 //import char02 from '../../../assets/sprites/char02-avatar.png';
@@ -13,7 +13,7 @@ export default class LevelMultiplayer extends Component {
     createHostVisible: false,
     joinHostVisible: false,
     amIHost: false,
-    hostCode: ""
+    hostCode: '',
   };
 
   doCreateHost = () => {
@@ -21,11 +21,11 @@ export default class LevelMultiplayer extends Component {
       this.setState({
         mainVisible: false,
         createHostVisible: true,
-        amIHost: true
+        amIHost: true,
       });
       this.context.logic.createHost();
     } else {
-      alert("Digite o nome de usuário antes.");
+      alert('Digite o nome de usuário antes.');
     }
   };
 
@@ -33,10 +33,10 @@ export default class LevelMultiplayer extends Component {
     if (this.context.state.username !== null) {
       this.setState({
         mainVisible: false,
-        joinHostVisible: true
+        joinHostVisible: true,
       });
     } else {
-      alert("Digite o nome de usuário antes.");
+      alert('Digite o nome de usuário antes.');
     }
   };
 
@@ -46,17 +46,17 @@ export default class LevelMultiplayer extends Component {
         mainVisible: false,
         createHostVisible: true,
         joinHostVisible: false,
-        amIHost: false
+        amIHost: false,
       });
       this.context.logic.joinHost(this.state.hostCode);
     } else {
-      alert("Digite código da sala");
+      alert('Digite código da sala');
     }
   };
 
-  setHostCode = code => {
+  setHostCode = (code) => {
     this.setState({
-      hostCode: code
+      hostCode: code,
     });
   };
 
@@ -64,13 +64,13 @@ export default class LevelMultiplayer extends Component {
     const context = this.context;
     return (
       <DivLevelMultiplayer className="level-multiplayer">
-        <div className={this.state.mainVisible ? "main" : "hide"}>
+        <div className={this.state.mainVisible ? 'main' : 'hide'}>
           <p>Nome de usuário</p>
           <br />
           <Input
             type="text"
             defaultValue={context.state.username}
-            onChange={e => {
+            onChange={(e) => {
               context.logic.setUsername(e.target.value);
             }}
           />
@@ -78,27 +78,29 @@ export default class LevelMultiplayer extends Component {
           <ul className="menu">
             <li className="menu-new">
               <Button
-                theme={"blue"}
+                theme="blue"
                 onClick={() => {
                   this.doCreateHost();
                 }}
-                label={"Criar Sala"}
-              />
+              >
+                Criar Sala
+              </Button>
             </li>
             <li className="menu-new">
               <Button
-                theme={"blue"}
+                theme="blue"
                 onClick={() => {
                   this.doStartJoinHost();
                 }}
-                label={"Entrar em uma sala"}
-              />
+              >
+                Entrar em uma sala
+              </Button>
             </li>
           </ul>
         </div>
 
-        <div className={this.state.createHostVisible ? "create-host" : "hide"}>
-          {context.state.hostCode !== "" ? (
+        <div className={this.state.createHostVisible ? 'create-host' : 'hide'}>
+          {context.state.hostCode !== '' ? (
             <>
               <p>Código da Sala:</p>
 
@@ -106,7 +108,7 @@ export default class LevelMultiplayer extends Component {
                 type="text"
                 readOnly={true}
                 defaultValue={context.state.hostCode}
-                onChange={e => {
+                onChange={(e) => {
                   context.logic.setUsername(e.target.value);
                 }}
               />
@@ -124,12 +126,13 @@ export default class LevelMultiplayer extends Component {
                 <li className="menu-new">
                   {this.state.amIHost ? (
                     <Button
-                      theme={"blue"}
+                      theme="blue"
                       onClick={() => {
                         context.logic.startMultiplayerGame();
                       }}
-                      label={"Iniciar Jogo"}
-                    />
+                    >
+                      Iniciar Jogo
+                    </Button>
                   ) : (
                     <p>Aguardando o dono da sala iniciar o jogo</p>
                   )}
@@ -141,12 +144,12 @@ export default class LevelMultiplayer extends Component {
           )}
         </div>
 
-        <div className={this.state.joinHostVisible ? "join-host" : "hide"}>
+        <div className={this.state.joinHostVisible ? 'join-host' : 'hide'}>
           <p>Digite o código da Sala:</p>
           <Input
             type="text"
             defaultValue={this.state.hostCode}
-            onChange={e => {
+            onChange={(e) => {
               this.setHostCode(e.target.value);
             }}
           />
@@ -154,12 +157,13 @@ export default class LevelMultiplayer extends Component {
           <ul className="menu">
             <li className="menu-new">
               <Button
-                theme={"blue"}
+                theme="blue"
                 onClick={() => {
                   this.doJoinHost();
                 }}
-                label={"Entrar na sala"}
-              />
+              >
+                Entrar na sala
+              </Button>
             </li>
           </ul>
         </div>

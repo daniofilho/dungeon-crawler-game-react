@@ -33,6 +33,8 @@ class Scenario {
     // Gen each frame based on sizes
     let index = 0;
 
+    // Create an empty array of X empty positions and then loop
+    // This replaces a for
     new Array(this.tilesColHeight).fill('').forEach((_, r) => {
       new Array(this.tilesColWidth).fill('').forEach((__, c) => {
         // Define position

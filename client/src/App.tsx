@@ -7,8 +7,6 @@ import UI from 'components/UI';
 
 import { GlobalStyle } from 'assets/styles/global';
 
-console.clear();
-
 export default class App extends Component {
   render() {
     return (

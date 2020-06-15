@@ -19,11 +19,9 @@ export default class MainMenu extends Component {
         <div id="first-screen" style={firstScreenStyle}>
           <ul className="menu">
             <li>
-              <Button
-                theme={'blue'}
-                onClick={context.logic.start}
-                label={'Iniciar Jogo'}
-              />
+              <Button theme="blue" onClick={context.logic.start}>
+                Iniciar Jogo
+              </Button>
             </li>
           </ul>
         </div>
@@ -32,48 +30,53 @@ export default class MainMenu extends Component {
           <ul className="menu level-menu">
             <li>
               <Button
-                theme={'blue'}
+                theme="blue"
                 onClick={() => {
                   context.logic.mainMenu('menu-new');
                 }}
-                label={'Novo Jogo'}
-              />
+              >
+                Novo Jogo
+              </Button>
             </li>
             <li>
               <Button
-                theme={'blue'}
+                theme="blue"
                 onClick={() => {
                   context.logic.mainMenu('multiplayer');
                 }}
-                label={'Multijogador'}
-              />
+              >
+                Multijogador
+              </Button>
             </li>
             <li>
               <Button
-                theme={'blue'}
+                theme="blue"
                 onClick={() => {
                   context.logic.mainMenu('load');
                 }}
-                label={'Carregar Jogo'}
-              />
+              >
+                Carregar Jogo
+              </Button>
             </li>
             <li>
               <Button
-                theme={'blue'}
+                theme="blue"
                 onClick={() => {
                   context.logic.mainMenu('instructions');
                 }}
-                label={'Instruções'}
-              />
+              >
+                Instruções
+              </Button>
             </li>
             <li>
               <Button
-                theme={'blue'}
+                theme="blue"
                 onClick={() => {
                   context.logic.mainMenu('credits');
                 }}
-                label={'Créditos'}
-              />
+              >
+                Créditos
+              </Button>
             </li>
           </ul>
 
