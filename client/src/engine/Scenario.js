@@ -32,8 +32,10 @@ class Scenario {
   setupTiles = () => {
     // Gen each frame based on sizes
     let index = 0;
-    for (let r = 0; r < this.tilesColHeight; r++) {
-      for (let c = 0; c < this.tilesColWidth; c++) {
+    //for (let r = 0; r < this.tilesColHeight; r++) {
+    //  for (let c = 0; c < this.tilesColWidth; c++) {
+    new Array(this.tilesColHeight).fill("").forEach((_, r) => {
+      new Array(this.tilesColWidth).fill("").forEach((__, c) => {
         // Define position
         let x = this.tileSize * c;
         let y = this.tileSize * r;
@@ -44,7 +46,7 @@ class Scenario {
         let tile = this.vars.globalAssets.getAsset("tile", {
           x: x,
           y: y,
-          isInitial: isInitial
+          isInitial: isInitial,
         });
         this.tiles[index] = { tile };
         this.addRenderItem(tile);
@@ -53,8 +55,8 @@ class Scenario {
         if (isInitial) {
           this.setInitialStateProps(x, y);
         }
-      }
-    }
+      });
+    });
   };
 
   setInitialStateProps = (x, y) => {
@@ -62,7 +64,7 @@ class Scenario {
       x: x,
       y: y,
       centerX: x + this.tileSize / 2,
-      centerY: y + this.tileSize / 2
+      centerY: y + this.tileSize / 2,
     };
   };
   getInitialStateProps() {
