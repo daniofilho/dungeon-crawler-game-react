@@ -67,6 +67,14 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     background: #555;
     font-family: "Press Start 2P";
+
+    /* Disable text selection and prevent bugs on drag an drop */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .hide {

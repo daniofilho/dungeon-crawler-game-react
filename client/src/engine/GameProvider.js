@@ -45,7 +45,7 @@ class GameProvider extends Component {
   state = {
     /* Debug */
     debug: {
-      active: false,
+      active: true,
       autoLoad: false,
     },
 
@@ -352,6 +352,8 @@ class GameProvider extends Component {
   };
 
   startNewGame = (saveData, multiplayer) => {
+    const { state, vars } = this;
+
     // # Init
     this.defaultEventListeners();
 
@@ -382,10 +384,11 @@ class GameProvider extends Component {
       () => {
         let character = (
           <Character
-            charType={this.state.charProps.type}
+            charType={state.charProps.type}
             saveData={saveData}
-            gameState={this.state}
-            gameVars={this.vars}
+            x={charProps.x}
+            y={charProps.y}
+            tileSize={vars.tileSize}
           />
         );
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DivMonstros } from './style';
-import { GameContext } from '../../../../engine/GameProvider';
-import Button from '../../../Button';
+import { GameContext } from 'engine/GameProvider';
+import Button from 'components/Button';
 
 export default class Monstros extends Component {
   render() {

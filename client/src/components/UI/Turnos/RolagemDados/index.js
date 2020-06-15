@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { DivRolagemDados } from './style';
-import { GameContext } from '../../../../engine/GameProvider';
-import Button from '../../../Button';
-import Dice from '../../Dice';
+import { GameContext } from 'engine/GameProvider';
+import Button from 'components/Button';
+import Dice from 'components/UI/Dice';
 
 export default class RolagemDados extends Component {
   defautlDiceCheck = {

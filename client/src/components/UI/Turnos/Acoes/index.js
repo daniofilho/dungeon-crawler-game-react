@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DivAcoes } from './style';
-import { GameContext } from '../../../../engine/GameProvider';
-import Button from '../../../Button';
+import { GameContext } from 'engine/GameProvider';
+import Button from 'components/Button';
 
 export default class Acoes extends Component {
   render() {
