@@ -1,4 +1,4 @@
-const { addBabelPlugin, override } = require('customize-cra');
+import { addBabelPlugin, override } from 'customize-cra';
 
 module.exports = override(
   addBabelPlugin([
