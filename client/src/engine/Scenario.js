@@ -8,7 +8,7 @@ class Scenario {
     this.tileSize = this.vars.tileSize;
 
     this.sound = null;
-    this.soundSrc = "";
+    this.soundSrc = '';
 
     this.initSound();
 
@@ -32,10 +32,9 @@ class Scenario {
   setupTiles = () => {
     // Gen each frame based on sizes
     let index = 0;
-    //for (let r = 0; r < this.tilesColHeight; r++) {
-    //  for (let c = 0; c < this.tilesColWidth; c++) {
-    new Array(this.tilesColHeight).fill("").forEach((_, r) => {
-      new Array(this.tilesColWidth).fill("").forEach((__, c) => {
+
+    new Array(this.tilesColHeight).fill('').forEach((_, r) => {
+      new Array(this.tilesColWidth).fill('').forEach((__, c) => {
         // Define position
         let x = this.tileSize * c;
         let y = this.tileSize * r;
@@ -43,7 +42,7 @@ class Scenario {
         let isInitial =
           c === this.initialX && r === this.initialY ? true : false;
         // Generate component and add it to array of items
-        let tile = this.vars.globalAssets.getAsset("tile", {
+        let tile = this.vars.globalAssets.getAsset('tile', {
           x: x,
           y: y,
           isInitial: isInitial,
