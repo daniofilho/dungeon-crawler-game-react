@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { DivUI } from "./style";
-import { GameContext } from "../../engine/GameProvider";
-import Dice from "./Dice";
+import React, { Component } from 'react';
+import { DivUI } from './style';
+import { GameContext } from 'engine/GameProvider';
+import Dice from './Dice';
 
-import Turnos from "./Turnos";
+import Turnos from './Turnos';
 
 export default class UI extends Component {
   renderDices() {
@@ -13,7 +13,7 @@ export default class UI extends Component {
       li.push(
         <li key={index}>
           <Dice number={props.dices[index].value} />
-        </li>
+        </li>,
       );
     }
     return <ul className="dices">{li}</ul>;

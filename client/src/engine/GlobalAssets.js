@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Tile from "../components/game-assets/Tile";
+import Tile from 'components/game-assets/Tile';
 
 class GlobalAssets {
   constructor(gameState, gameVars) {
@@ -12,7 +12,7 @@ class GlobalAssets {
     let r;
     switch (type) {
       default:
-      case "tile":
+      case 'tile':
         r = (
           <Tile
             componentProps={props}

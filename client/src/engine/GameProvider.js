@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
+import React, { Component } from 'react';
+import io from 'socket.io-client';
 //import api from '../services/api';
 
-import { Scenario } from "./Scenario";
-import { GlobalAssets } from "./GlobalAssets";
+import { Scenario } from './Scenario';
+import { GlobalAssets } from './GlobalAssets';
 
-import Character from "../components/game-assets/Character";
+import Character from 'components/game-assets/Character';
 
 const GameContext = React.createContext();
 
@@ -35,28 +35,28 @@ class GameProvider extends Component {
       x: 0,
       y: 0,
       centerX: 0,
-      centerY: 0
+      centerY: 0,
     },
 
     /* "states" */
-    mouseDown: false
+    mouseDown: false,
   };
 
   state = {
     /* Debug */
     debug: {
       active: false,
-      autoLoad: false
+      autoLoad: false,
     },
 
     /* multiplayer */
-    username: "daniofilho",
-    hostCode: "",
+    username: 'daniofilho',
+    hostCode: '',
     hostConnectedUsers: [],
 
     /* mainMenu */
-    fistScreenDisplay: "flex",
-    mainMenuClass: "",
+    fistScreenDisplay: 'flex',
+    mainMenuClass: '',
 
     /* states */
     isLoading: false,
@@ -65,7 +65,7 @@ class GameProvider extends Component {
     character: false,
     charProps: {
       lifes: 0,
-      type: "",
+      type: '',
       x: 800,
       y: 800,
       diceQty: 6,
@@ -75,22 +75,22 @@ class GameProvider extends Component {
         { value: -1, isUsed: false },
         { value: -1, isUsed: false },
         { value: -1, isUsed: false },
-        { value: -1, isUsed: false }
-      ]
+        { value: -1, isUsed: false },
+      ],
     },
 
     /* UI */
-    UIClassName: "hide",
+    UIClassName: 'hide',
 
     /* Turns */
-    turn: "",
+    turn: '',
     playerTurn: false,
 
     /* Dices */
     rollsLeft: 3222,
 
     /* Render */
-    renderItems: []
+    renderItems: [],
   };
 
   /* Functions */
@@ -103,39 +103,39 @@ class GameProvider extends Component {
     this.vars.globalAssets = new GlobalAssets(this.state, this.vars);
     this.setState(
       {
-        fistScreenDisplay: "none",
-        mainMenuClass: "show"
+        fistScreenDisplay: 'none',
+        mainMenuClass: 'show',
       },
       () => {
-        if (this.state.debug.autoLoad) this.mainMenu("new", "char01");
-      }
+        if (this.state.debug.autoLoad) this.mainMenu('new', 'char01');
+      },
     );
   };
 
   /* loading */
-  loading = bool => {
+  loading = (bool) => {
     this.setState({ isLoading: bool });
   };
 
   /* Main Menu */
 
-  mainMenu = action => {
+  mainMenu = (action) => {
     switch (action) {
-      case "menu-new":
-        this.setState({ mainMenuClass: "show new" });
+      case 'menu-new':
+        this.setState({ mainMenuClass: 'show new' });
         break;
-      case "multiplayer":
-        this.setState({ mainMenuClass: "show multiplayer" });
+      case 'multiplayer':
+        this.setState({ mainMenuClass: 'show multiplayer' });
         break;
-      case "new":
-        this.setState({ mainMenuClass: "" });
+      case 'new':
+        this.setState({ mainMenuClass: '' });
         this.loading(true);
         setTimeout(() => {
           this.startNewGame(false, false);
         }, 500);
         break;
       default:
-        alert("Em desenvolvimento");
+        alert('Em desenvolvimento');
         break;
     }
   };
@@ -147,17 +147,17 @@ class GameProvider extends Component {
   defaultEventListeners = () => {
     // # Keyboard Events
     window.addEventListener(
-      "keyup",
-      function(e) {
+      'keyup',
+      function (e) {
         this.handleKeyUp(e.keyCode);
       }.bind(this),
-      false
+      false,
     );
 
     this.draggableCanvas();
   };
 
-  handleKeyUp = keyCode => {
+  handleKeyUp = (keyCode) => {
     // Dialog
     if (keyCode === 32)
       if (this.state.scenario)
@@ -167,7 +167,7 @@ class GameProvider extends Component {
 
   // Allow to move the screen with mouse click
   draggableCanvas = () => {
-    window.addEventListener("mousedown", e => {
+    window.addEventListener('mousedown', (e) => {
       this.vars.mouseDown = true;
       this.vars.mouseX0 = e.x;
       this.vars.mouseY0 = e.y;
@@ -175,24 +175,24 @@ class GameProvider extends Component {
       this.vars.pageY = window.scrollY;
     });
 
-    window.addEventListener("mouseup", () => {
+    window.addEventListener('mouseup', () => {
       this.vars.mouseDown = false;
     });
 
-    window.addEventListener("mousemove", e => {
+    window.addEventListener('mousemove', (e) => {
       this.vars.mouseX = e.x;
       this.vars.mouseY = e.y;
       this.updateScreenScroll();
     });
 
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       if (this.state.scenario) this.state.scenario.centerScreen();
     });
   };
 
   updateScreenScroll = () => {
-    if (this.vars.mouseDown && this.state.turn === "acoes") {
-      document.body.style.cursor = "grabbing";
+    if (this.vars.mouseDown && this.state.turn === 'acoes') {
+      document.body.style.cursor = 'grabbing';
       let scrollX = this.vars.mouseX - this.vars.mouseX0;
       let scrollY = this.vars.mouseY - this.vars.mouseY0;
 
@@ -200,29 +200,29 @@ class GameProvider extends Component {
       let y = this.vars.pageY - scrollY;
       window.scrollTo(x, y);
     } else {
-      document.body.style.cursor = "default";
+      document.body.style.cursor = 'default';
     }
   };
 
   /* - - - - - - */
 
   /* Sets */
-  setUsername = username => {
+  setUsername = (username) => {
     this.setState({
-      username: username
+      username: username,
     });
   };
-  setHostCode = code => {
+  setHostCode = (code) => {
     this.setState({
-      hostCode: code
+      hostCode: code,
     });
   };
-  setCharType = type => {
-    this.setState(prevState => ({
+  setCharType = (type) => {
+    this.setState((prevState) => ({
       charProps: {
         ...prevState.charProps,
-        type: type
-      }
+        type: type,
+      },
     }));
   };
 
@@ -238,33 +238,33 @@ class GameProvider extends Component {
       } else {
         dices[index] = {
           value: Math.floor(Math.random() * 6) + 1,
-          isUsed: false
+          isUsed: false,
         };
       }
     }
     return dices;
   }
 
-  rollDices = keepIndex => {
+  rollDices = (keepIndex) => {
     if (this.state.rollsLeft > 0) {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         charProps: {
           ...prevState.charProps,
-          dices: this.getADiceRoll(keepIndex)
+          dices: this.getADiceRoll(keepIndex),
         },
-        rollsLeft: this.state.rollsLeft - 1
+        rollsLeft: this.state.rollsLeft - 1,
       }));
     }
   };
-  finishRollDiceTurn = callback => {
+  finishRollDiceTurn = (callback) => {
     this.setState(
       {
-        turn: "acoes",
-        UIClassName: "acoes"
+        turn: 'acoes',
+        UIClassName: 'acoes',
       },
       () => {
         if (callback) callback();
-      }
+      },
     );
   };
 
@@ -274,8 +274,8 @@ class GameProvider extends Component {
 
   finishActionTurn = () => {
     this.setState({
-      turn: "monstros",
-      UIClassName: "monstros"
+      turn: 'monstros',
+      UIClassName: 'monstros',
     });
   };
 
@@ -284,14 +284,14 @@ class GameProvider extends Component {
   /* Monsters */
 
   finishMonstersTurn = () => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       charProps: {
         ...prevState.charProps,
-        dices: this.getADiceRoll()
+        dices: this.getADiceRoll(),
       },
       rollsLeft: 3,
-      turn: "rolar-dados",
-      UIClassName: "rolar-dados"
+      turn: 'rolar-dados',
+      UIClassName: 'rolar-dados',
     }));
   };
 
@@ -300,18 +300,18 @@ class GameProvider extends Component {
   /* Server */
 
   conn = () => {
-    this.socket = io("http://localhost:3333", {
-      query: { username: this.state.username }
+    this.socket = io('http://localhost:3333', {
+      query: { username: this.state.username },
     });
 
     //Eventos recebidos pelo socket
-    this.socket.on("host-created", hostCode => {
+    this.socket.on('host-created', (hostCode) => {
       this.setState({ hostCode: hostCode });
     });
-    this.socket.on("host-users-updated", users => {
+    this.socket.on('host-users-updated', (users) => {
       this.setState({ hostConnectedUsers: users });
     });
-    this.socket.on("join-host-finished", headers => {
+    this.socket.on('join-host-finished', (headers) => {
       if (headers.operationSucceded) {
         this.setState({ hostCode: headers.hostCode });
       } else {
@@ -323,19 +323,19 @@ class GameProvider extends Component {
   createHost = () => {
     if (this.state.username !== null) {
       this.conn();
-      this.socket.emit("create-host", {
-        username: this.state.username
+      this.socket.emit('create-host', {
+        username: this.state.username,
       });
     } else {
-      alert("Digite o nome de usuário antes.");
+      alert('Digite o nome de usuário antes.');
     }
   };
 
-  joinHost = hostCode => {
+  joinHost = (hostCode) => {
     this.conn();
-    this.socket.emit("join-host", {
+    this.socket.emit('join-host', {
       username: this.state.username,
-      hostCode: hostCode
+      hostCode: hostCode,
     });
   };
 
@@ -344,7 +344,7 @@ class GameProvider extends Component {
   /* New Game */
 
   startMultiplayerGame = () => {
-    this.setState({ mainMenuClass: "" });
+    this.setState({ mainMenuClass: '' });
     this.loading(true);
     setTimeout(() => {
       this.startNewGame(false, true);
@@ -369,15 +369,15 @@ class GameProvider extends Component {
 
     // # Set States and finish
     this.setState(
-      prevState => ({
+      (prevState) => ({
         charProps: {
           ...prevState.charProps,
           x: charProps.x,
           y: charProps.y,
-          dices: this.getADiceRoll()
+          dices: this.getADiceRoll(),
         },
         scenario: scenario,
-        initialTileProps: initialTileProps
+        initialTileProps: initialTileProps,
       }),
       () => {
         let character = (
@@ -396,16 +396,16 @@ class GameProvider extends Component {
           {
             renderItems: renderItems,
             character: character,
-            UIClassName: "rolar-dados",
-            turn: "rolar-dados"
+            UIClassName: 'rolar-dados',
+            turn: 'rolar-dados',
           },
           () => {
             // Finished
             this.state.scenario.centerScreen();
             this.loading(false);
-          }
+          },
         );
-      }
+      },
     );
   };
 
@@ -438,7 +438,7 @@ class GameProvider extends Component {
     /* turns */
     finishRollDiceTurn: this.finishRollDiceTurn,
     finishActionTurn: this.finishActionTurn,
-    finishMonstersTurn: this.finishMonstersTurn
+    finishMonstersTurn: this.finishMonstersTurn,
   };
 
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
