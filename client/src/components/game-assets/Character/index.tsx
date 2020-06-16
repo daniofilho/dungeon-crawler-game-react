@@ -12,7 +12,6 @@ interface CharacterProps {
 }
 
 const Character: React.FC<CharacterProps> = ({ ...rest }) => {
-  console.log({ rest });
 
   const [charImage, setCharImage] = useState(char01_avatar);
 
