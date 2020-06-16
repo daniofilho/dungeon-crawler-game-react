@@ -1,12 +1,10 @@
 import React, { useContext } from 'react';
-import { DivGameScene } from './style';
+
 import { GameContext } from 'engine/GameProvider';
 
-interface ContextType {
-  state: {
-    renderItems: Array<Object>;
-  };
-}
+import { ContextType } from 'interfaces/context';
+
+import { DivGameScene } from './style';
 
 const GameScenes: React.FC = () => {
   const context = useContext<ContextType>(GameContext);

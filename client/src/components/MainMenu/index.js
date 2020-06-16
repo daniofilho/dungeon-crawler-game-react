@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { GameContext } from 'engine/GameProvider';
 import { DivMainMenu } from './style';
 
-import Loading from 'components/Loading/index';
+import Loading from 'components/Loading';
 import Button from 'components/Button';
 
 import LevelNewGame from './level-new-game';
