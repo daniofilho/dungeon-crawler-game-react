@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { GameContext } from 'engine/GameProvider';
 
-import { ContextType } from 'interfaces/context';
+import { ContextType } from 'types';
 
 import { DivGameScene } from './style';
 

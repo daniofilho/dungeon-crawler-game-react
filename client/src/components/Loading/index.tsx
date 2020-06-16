@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { GameContext } from 'engine/GameProvider';
 import { DivLoading } from './style';
 
-import { ContextType } from 'interfaces/context';
+import { ContextType } from 'types';
 
 const Loading: React.FC = () => {
   const context = useContext<ContextType>(GameContext);

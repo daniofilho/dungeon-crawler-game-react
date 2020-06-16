@@ -2,7 +2,7 @@ import React, { InputHTMLAttributes } from 'react';
 import { DivInput } from './style';
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  theme: string;
+  theme?: string;
 };
 
 const Input: React.FC<InputProps> = ({ ...rest }) => {
