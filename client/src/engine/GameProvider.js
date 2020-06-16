@@ -7,6 +7,7 @@ import { GlobalAssets } from './GlobalAssets';
 
 import Character from 'components/game-assets/Character';
 
+//https://www.fullstacklabs.co/blog/usecontext-data-discoverable-typescript
 const GameContext = React.createContext();
 
 class GameProvider extends Component {

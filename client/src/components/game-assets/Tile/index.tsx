@@ -17,7 +17,18 @@ const Tile: React.FC<TileProps> = ({ ...rest }) => {
     return <span>{`${x}x${y}`}</span>;
   };
 
-  return <DivTile {...rest}>{debug && renderDebug()}</DivTile>;
+  // using style inline for performance reasons
+  return (
+    <DivTile
+      {...rest}
+      style={{
+        left: x,
+        top: y,
+      }}
+    >
+      {debug && renderDebug()}
+    </DivTile>
+  );
 };
 
 export default Tile;

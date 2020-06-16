@@ -8,16 +8,19 @@ class GlobalAssets {
     this.gameVars = gameVars;
   }
 
-  getAsset = (type, props, fromSaveState) => {
+  getAsset = (type, componentProps, fromSaveState = false) => {
     let r;
     switch (type) {
       default:
       case 'tile':
         r = (
           <Tile
-            componentProps={props}
-            gameState={this.gameState}
-            gameVars={this.gameVars}
+            x={componentProps.x}
+            y={componentProps.y}
+            isInitial={componentProps.isInitial}
+            width={this.gameVars.tileSize}
+            height={this.gameVars.tileSize}
+            debug={this.gameState.debug.active}
           />
         );
         break;
