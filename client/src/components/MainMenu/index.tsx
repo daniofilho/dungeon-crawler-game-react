@@ -15,7 +15,7 @@ const MainMenu: React.FC = () => {
 
   const {
     state: { fistScreenDisplay, mainMenuClass },
-    logic: { start, mainMenu },
+    logic: { start = () => {}, mainMenu = () => {} },
   } = context;
 
   const firstScreenStyle = {

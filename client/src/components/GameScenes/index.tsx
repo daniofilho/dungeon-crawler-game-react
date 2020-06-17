@@ -2,7 +2,9 @@ import React, { useContext } from 'react';
 
 import { GameContext } from 'engine/GameProvider';
 
-import { ContextType } from 'types';
+import { getAsset } from 'engine/GlobalAssets';
+
+import { ContextType, RenderItemType } from 'types';
 
 import { DivGameScene } from './style';
 
@@ -13,8 +15,8 @@ const GameScenes: React.FC = () => {
 
   return (
     <DivGameScene>
-      {renderItems.map((item, index: number) => {
-        return <div key={index}>{item}</div>;
+      {renderItems.map((item: RenderItemType, index: number) => {
+        return <div key={index}>{getAsset(item)}</div>;
       })}
     </DivGameScene>
   );

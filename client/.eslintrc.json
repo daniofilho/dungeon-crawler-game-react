@@ -23,7 +23,7 @@
     "prettier/prettirer": "error",
     "react-hooks/rules-of-hooks": "error",
     "react/jsx-props-no-spreading": "off",
-    "react-hooks/exhaustive-depos": "warn",
+    "react-hooks/exhaustive-depos": "error",
     "react/jsx-filename-extension": [1, { "extensions": ["tsx"] }],
     "import/prefere-default-export": "off",
     "import/extensions": [

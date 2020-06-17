@@ -1,5 +1,30 @@
-class Scenario {
-  constructor(state, vars) {
+import { GameStateType, GameVarsType, RenderItemType } from 'types';
+
+export default class Scenario {
+  state: GameStateType;
+  vars: GameVarsType;
+
+  renderItems: Array<Object>;
+
+  tileSize: number;
+
+  sound: string;
+  soundSrc: string;
+
+  // Rows and Collumns quantity
+  tilesColWidth: number;
+  tilesColHeight: number;
+
+  initialX: number;
+  initialY: number;
+
+  initialTile: boolean;
+  initialTileProps: object;
+
+  // The frames
+  tiles: Array<RenderItemType>;
+
+  constructor(state: GameStateType, vars: GameVarsType) {
     this.state = state;
     this.vars = vars;
 
@@ -7,7 +32,7 @@ class Scenario {
 
     this.tileSize = this.vars.tileSize;
 
-    this.sound = null;
+    this.sound = '';
     this.soundSrc = '';
 
     this.initSound();
@@ -23,7 +48,7 @@ class Scenario {
     this.initialTileProps = {};
 
     // The frames
-    this.tiles = {};
+    this.tiles = [];
 
     this.run();
   }
@@ -43,13 +68,14 @@ class Scenario {
         //Check if is initial Tile
         let isInitial =
           c === this.initialX && r === this.initialY ? true : false;
-        // Generate component and add it to array of items
-        let tile = this.vars.globalAssets.getAsset('tile', {
+        // Generate component props and add it to array of items
+        let tile = {
+          type: 'tile',
           x: x,
           y: y,
           isInitial: isInitial,
-        });
-        this.tiles[index] = { tile };
+        };
+        this.tiles[index] = tile;
         this.addRenderItem(tile);
         index++;
 
@@ -60,7 +86,7 @@ class Scenario {
     });
   };
 
-  setInitialStateProps = (x, y) => {
+  setInitialStateProps = (x: number, y: number) => {
     this.initialTileProps = {
       x: x,
       y: y,
@@ -85,22 +111,22 @@ class Scenario {
   }
 
   // Render
-  addRenderItem(item) {
+  addRenderItem(item: RenderItemType) {
     this.renderItems.push(item);
   }
   getRenderItems() {
     return this.renderItems;
   }
 
-  // Da scroll na tela para centralizar até o chunk central
+  // Center screen relatively to central tile/chunk
   centerScreen() {
     let x = this.initialX * this.tileSize;
     let y = this.initialY * this.tileSize;
 
-    // Decide o X e Y central de um chunk
+    // Get the XY central of a chunk
     let centerXY = this.tileSize / 2;
 
-    // Quantos tiles cabem na tela?
+    // How many tiles fit on screen?
     let tilesWidth = document.documentElement.clientWidth / this.tileSize;
     let tilesHeight = document.documentElement.clientHeight / this.tileSize;
 
@@ -114,4 +140,3 @@ class Scenario {
     this.setupTiles();
   }
 } //class
-export { Scenario };

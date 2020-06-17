@@ -11,7 +11,7 @@ const Acoes: React.FC = () => {
   const context = useContext<ContextType>(GameContext);
 
   const {
-    logic: { finishActionTurn },
+    logic: { finishActionTurn = () => {} },
     state: { turn },
   } = context;
 

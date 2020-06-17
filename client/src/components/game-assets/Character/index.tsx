@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+
+import { GameContext } from 'engine/GameProvider';
+
 import { DivChar } from './styles';
+
+import { CharacterProps, ContextType } from 'types';
 
 const char01_avatar = 'images/char01-avatar.png';
 const char02_avatar = 'images/char02-avatar.png';
 
-interface CharacterProps {
-  charType?: string;
-  x: number;
-  y: number;
-  tileSize: number;
-}
-
 const Character: React.FC<CharacterProps> = ({ ...rest }) => {
-
-  const [charImage, setCharImage] = useState(char01_avatar);
+  const context = useContext<ContextType>(GameContext);
 
   // Set character image
   const defineCharImage = (type: string) => {
@@ -26,12 +23,19 @@ const Character: React.FC<CharacterProps> = ({ ...rest }) => {
     }
   };
 
-  // When load, set char image
-  useEffect(() => {
-    setCharImage(defineCharImage('ss'));
-  }, []);
+  const { charType = 'char01' } = rest;
+  const charImage = defineCharImage(charType);
 
-  return <DivChar {...rest} image={charImage} />;
+  const tileSize = context.vars.tileSize;
+
+  return (
+    <DivChar
+      x={rest.x || 0}
+      y={rest.y || 0}
+      tileSize={tileSize}
+      image={charImage}
+    />
+  );
 };
 
 export default Character;

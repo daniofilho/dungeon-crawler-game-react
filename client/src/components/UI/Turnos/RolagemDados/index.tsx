@@ -13,7 +13,7 @@ const RolagemDados: React.FC = () => {
   const context = useContext<ContextType>(GameContext);
 
   const {
-    logic: { rollDices, finishRollDiceTurn },
+    logic: { rollDices = () => {}, finishRollDiceTurn = () => {} },
     state: { charProps, rollsLeft, turn },
   } = context;
   const { dices } = charProps;

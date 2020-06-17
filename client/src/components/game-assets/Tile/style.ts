@@ -4,9 +4,9 @@ import closed from 'assets/sprites/tile-closed.jpg';
 import open from 'assets/sprites/tile-open.jpg';
 
 interface PropType {
-  width: number;
-  height: number;
-  isInitial: boolean;
+  width?: number;
+  height?: number;
+  isInitial?: boolean;
 }
 
 export const DivTile = styled.div<PropType>`

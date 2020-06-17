@@ -14,7 +14,12 @@ const LevelMultiplayer: React.FC = () => {
 
   const { state, logic } = context;
   const { username, hostConnectedUsers } = state;
-  const { createHost, joinHost, setUsername } = logic;
+  const {
+    createHost = () => {},
+    joinHost = () => {},
+    setUsername = () => {},
+    startMultiplayerGame = () => {},
+  } = logic;
 
   const [mainVisible, setMainVisible] = useState<boolean>(true);
   const [createHostVisible, setCreateHostVisible] = useState<boolean>(false);
@@ -116,7 +121,7 @@ const LevelMultiplayer: React.FC = () => {
                   <Button
                     theme="blue"
                     onClick={() => {
-                      context.logic.startMultiplayerGame();
+                      startMultiplayerGame();
                     }}
                   >
                     Iniciar Jogo

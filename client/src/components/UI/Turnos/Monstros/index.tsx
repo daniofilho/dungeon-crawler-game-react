@@ -12,7 +12,7 @@ const Monstros: React.FC = () => {
   const context = useContext<ContextType>(GameContext);
 
   const {
-    logic: { finishMonstersTurn },
+    logic: { finishMonstersTurn = () => {} },
     state: { turn },
   } = context;
 

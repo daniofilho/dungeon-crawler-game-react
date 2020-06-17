@@ -13,7 +13,7 @@ const LevelNewGame: React.FC = () => {
   const context = useContext<ContextType>(GameContext);
 
   const {
-    logic: { setCharType, mainMenu },
+    logic: { setCharType = () => {}, mainMenu = () => {} },
   } = context;
 
   const doChoosePlayer = (type: string) => {
