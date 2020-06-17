@@ -1,4 +1,4 @@
-interface DiceType {
+export interface DiceType {
   value: number;
   isUsed: boolean;
 }
@@ -30,6 +30,7 @@ export interface ContextType {
       type: string;
       x: number;
       y: number;
+      dicesInitialQty: number;
       diceQty: number;
       dices: Array<DiceType>;
     };

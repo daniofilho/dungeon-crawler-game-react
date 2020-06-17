@@ -69,7 +69,7 @@ class GameProvider extends Component {
       type: '',
       x: 800,
       y: 800,
-      diceQty: 6,
+      dicesInitialQty: 6,
       dices: [
         { value: -1, isUsed: false },
         { value: -1, isUsed: false },
@@ -231,19 +231,27 @@ class GameProvider extends Component {
 
   /* Roll Dices */
 
-  getADiceRoll(keepIndex) {
-    let dices = {};
-    for (let index = 0; index < this.state.charProps.diceQty; index++) {
-      if (keepIndex && keepIndex.includes(index)) {
-        dices[index] = this.state.charProps.dices[index];
-      } else {
-        dices[index] = {
-          value: Math.floor(Math.random() * 6) + 1,
-          isUsed: false,
-        };
-      }
-    }
-    return dices;
+  getADiceRoll(keepIndexes) {
+    let aux = [];
+
+    // Generate a new dice roll
+    new Array(this.state.charProps.dicesInitialQty)
+      .fill('')
+      .forEach((_, index) => {
+        // Will need to keep th value of this Dice?
+        if (keepIndexes && keepIndexes.includes(index)) {
+          // keep
+          aux.push(this.state.charProps.dices[index]);
+        } else {
+          // gen a new one
+          aux.push({
+            value: Math.floor(Math.random() * 6) + 1,
+            isUsed: false,
+          });
+        }
+      });
+
+    return aux;
   }
 
   rollDices = (keepIndex) => {
