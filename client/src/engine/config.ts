@@ -2,9 +2,9 @@ import { GameVarsType, GameStateType } from 'types';
 
 export const _vars: GameVarsType = {
   /* Config */
-  tileSize: 150, //px - resolution
-  horizontalTiles: 20,
-  verticalTiles: 20,
+  tileSize: 1.2, // 150, //px - resolution
+  horizontalTiles: 2,
+  verticalTiles: 2,
 
   /* screen vars */
   mouseX: 0,
@@ -32,7 +32,17 @@ export const _state: GameStateType = {
   /* Debug */
   debug: {
     active: false,
-    autoLoad: false,
+    autoLoad: true,
+  },
+
+  /* camera */
+  camera: {
+    fov: 100,
+    position: {
+      x: 0,
+      y: 0,
+      z: -5,
+    },
   },
 
   /* multiplayer */

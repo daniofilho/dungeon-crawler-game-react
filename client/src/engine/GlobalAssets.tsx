@@ -8,6 +8,7 @@ import Character from 'components/game-assets/Character';
 export const getAsset = (props: RenderItemType) => {
   switch (props.type) {
     default:
+      return <></>;
     case 'tile':
       return <Tile {...props} />;
     //case 'character':

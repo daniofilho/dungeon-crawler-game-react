@@ -1,5 +1,11 @@
-import React, { useContext, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useFrame } from 'react-three-fiber';
+import {
+  TextureLoader,
+  LoadingManager,
+  NearestFilter,
+  MeshBasicMaterial,
+} from 'three';
 
 import { GameContext } from 'engine/GameProvider';
 
@@ -17,44 +23,41 @@ interface TileProps {
 const Tile: React.FC<TileProps> = ({ ...rest }) => {
   const mesh: any = useRef();
 
-  const context = useContext<ContextType>(GameContext);
-
-  //console.log(context);
+  const [loaded, setLoaded] = useState<boolean>(false);
+  const [active, setActive] = useState<boolean>(false);
 
   const { x, y } = rest;
 
-  //const debug: boolean = context.state.debug.active;
+  // Texture
+  const loadManager = new LoadingManager();
+  const loader = new TextureLoader(loadManager);
 
-  const tileSize = context.vars.tileSize;
-
-  /*const renderDebug = () => {
-    return <span>{`${x}x${y}`}</span>;
-  };*/
+  const textureSides = loader.load('images/sprites/tile-open.jpg');
+  textureSides.magFilter = NearestFilter;
 
   // Rotate mesh every frame, this is outside of React without overhead
-  //useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01));
+  useFrame(() => {
+    if (loaded) mesh.current.rotation.x += 0.001;
+  });
 
-  // using style inline for performance reasons
-  return <></>;
+  loadManager.onLoad = () => {
+    setLoaded(true);
+  };
+
   return (
-    <mesh ref={mesh} scale={[1, 1, 1]} position={[x, y, 10]}>
-      <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
-      <meshStandardMaterial attach="material" color={'orange'} />
-    </mesh>
+    <>
+      {loaded && (
+        <mesh
+          ref={mesh}
+          position={[x, y, 0]}
+          onClick={(e) => setActive(!active)}
+        >
+          <boxGeometry attach="geometry" args={[1, 1, 1]} />
+          <meshBasicMaterial attach="material" map={textureSides} />
+        </mesh>
+      )}
+    </>
   );
-  /*return (
-    <DivTile
-      {...rest}
-      width={tileSize}
-      height={tileSize}
-      style={{
-        left: x,
-        top: y,
-      }}
-    >
-      {debug && renderDebug()}
-    </DivTile>
-  );*/
 };
 
 export default Tile;

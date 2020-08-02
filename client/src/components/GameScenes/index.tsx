@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Canvas } from 'react-three-fiber';
+import { Canvas, useFrame } from 'react-three-fiber';
 
 import { GameContext } from 'engine/GameProvider';
 
@@ -12,19 +12,23 @@ import { DivGameScene } from './style';
 const GameScenes: React.FC = () => {
   const context = useContext<ContextType>(GameContext);
 
-  const { renderItems } = context.state;
+  const { renderItems, camera } = context.state;
 
   return (
     <DivGameScene>
-      {/*<Canvas>
+      <Canvas
+        camera={{
+          fov: camera.fov,
+          position: [camera.position.x, camera.position.y, camera.position.z],
+        }}
+      >
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
 
-
-      </Canvas>*/}
-      {renderItems.map((item: RenderItemType, index: number) => {
-        return <div key={index}>{getAsset(item)}</div>;
-      })}
+        {renderItems.map((item: RenderItemType, index: number) => {
+          return <React.Fragment key={index}>{getAsset(item)}</React.Fragment>;
+        })}
+      </Canvas>
     </DivGameScene>
   );
 };

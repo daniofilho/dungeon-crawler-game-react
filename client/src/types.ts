@@ -77,6 +77,16 @@ export interface GameStateType {
     autoLoad: boolean;
   };
 
+  /* camera */
+  camera: {
+    fov: number;
+    position: {
+      x: number;
+      y: number;
+      z: number;
+    };
+  };
+
   /* multiplayer */
   username: string;
   hostCode: string;
@@ -136,6 +146,9 @@ export interface GameLogicType {
   finishRollDiceTurn: Function;
   finishActionTurn: Function;
   finishMonstersTurn: Function;
+
+  /* camera */
+  updateCameraPosition: Function;
 }
 
 export interface ContextType {

@@ -69,10 +69,14 @@ const GameProvider: React.FC = ({ children }) => {
       let scrollX = vars.mouseX - vars.mouseX0;
       let scrollY = vars.mouseY - vars.mouseY0;
 
-      let x = vars.pageX - scrollX;
-      let y = vars.pageY - scrollY;
+      //let x = vars.pageX - scrollX;
+      //let y = vars.pageY - scrollY;
 
-      window.scrollTo(x, y);
+      let x = state.camera.position.x - scrollX;
+      let y = state.camera.position.y - scrollY;
+
+      //window.scrollTo(x, y);
+      updateCameraPosition({ x, y });
     } else {
       document.body.style.cursor = 'default';
     }
@@ -218,7 +222,7 @@ const GameProvider: React.FC = ({ children }) => {
             renderItems: renderItems,
             character: character,
             UIClassName: 'rolar-dados',
-            turn: 'rolar-dados',
+            turn: 'acoes', //'rolar-dados', @TODO
           },
           () => {
             // Finished
@@ -332,6 +336,26 @@ const GameProvider: React.FC = ({ children }) => {
 
   /* - - - - - - */
 
+  /* Camera */
+  const updateCameraPosition = ({
+    x = state.camera.position.x,
+    y = state.camera.position.y,
+    z = state.camera.position.z,
+  }) => {
+    updateState({
+      camera: {
+        ...state.camera,
+        position: {
+          x,
+          y,
+          z,
+        },
+      },
+    });
+  };
+
+  /* - - - - - - */
+
   /* Server */
 
   const conn = () => {
@@ -398,6 +422,9 @@ const GameProvider: React.FC = ({ children }) => {
     finishRollDiceTurn: finishRollDiceTurn,
     finishActionTurn: finishActionTurn,
     finishMonstersTurn: finishMonstersTurn,
+
+    /* camera */
+    updateCameraPosition: updateCameraPosition,
   };
 
   return (
