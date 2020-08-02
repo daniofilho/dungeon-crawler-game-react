@@ -13,12 +13,14 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
+    "react-three-fiber": "^4.2.18",
     "socket.io-client": "^2.3.0",
     "styled-components": "^5.1.1",
+    "three": "^0.119.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "PORT=3003 react-scripts start",
+    "start": "react-scripts start",
     "build": "react-ascripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

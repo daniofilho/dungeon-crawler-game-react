@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { GameProvider } from './engine/GameProvider';
 
 import MainMenu from 'components/MainMenu';

@@ -1,10 +1,10 @@
 export interface RenderItemType {
   type: string;
-  isInitial?: boolean;
+  isInitial: boolean;
   debug?: boolean;
   saveData?: boolean;
-  x?: number;
-  y?: number;
+  x: number;
+  y: number;
   width?: number;
   height?: number;
   tileSize?: number;

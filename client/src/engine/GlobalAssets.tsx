@@ -10,7 +10,7 @@ export const getAsset = (props: RenderItemType) => {
     default:
     case 'tile':
       return <Tile {...props} />;
-    case 'character':
-      return <Character {...props} />;
+    //case 'character':
+    //return <Character {...props} />;
   }
 };

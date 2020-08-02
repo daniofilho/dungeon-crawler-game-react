@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Canvas } from 'react-three-fiber';
 
 import { GameContext } from 'engine/GameProvider';
 
@@ -15,6 +16,12 @@ const GameScenes: React.FC = () => {
 
   return (
     <DivGameScene>
+      {/*<Canvas>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+
+
+      </Canvas>*/}
       {renderItems.map((item: RenderItemType, index: number) => {
         return <div key={index}>{getAsset(item)}</div>;
       })}
