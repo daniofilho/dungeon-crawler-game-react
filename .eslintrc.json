@@ -1,0 +1,79 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "plugins": ["react-hooks", "react", "prettier", "@typescript-eslint"],
+  "settings": {
+    "import/resolver": {
+      "typescript": {},
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
+      },
+      "alias": {
+        "map": [
+          ["@src", "./src"],
+          ["~", "./src/app"],
+          ["@static", "./src/static"]
+        ],
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
+      }
+    },
+    "react": {
+      "version": "latest"
+    }
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "import/prefer-default-export": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-unused-expressions": "off",
+    "react/prop-types": "off",
+    "import/no-duplicates": "off",
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "@typescript-eslint/camelcase": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": 0,
+    "no-console": 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "import/no-unresolved": 0,
+    "no-param-reassign": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "react/no-array-index-key": 0,
+    "no-use-before-define": 0
+  }
+}

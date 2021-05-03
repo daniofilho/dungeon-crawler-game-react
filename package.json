@@ -1,0 +1,87 @@
+{
+  "name": "dungeon-crawler-game",
+  "productName": "Dungeon Crawler Game",
+  "version": "0.5",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src/**/*.{tsx,ts}",
+    "lint:fix": "eslint --fix src/**/*.{tsx,ts}"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.1.4",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "framer-motion": "^3.2.1",
+    "gsap": "^3.6.0",
+    "immer": "^8.0.1",
+    "pathfinding": "^0.4.18",
+    "polished": "^4.1.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^3.11.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-spinners": "^0.9.0",
+    "styled-components": "^5.2.1",
+    "sweetalert2": "^10.10.0",
+    "typescript": "^4.1.2",
+    "uniqid": "^5.2.0",
+    "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/gsap": "^1.20.2",
+    "@types/pathfinding": "^0.0.4",
+    "@types/react": "^16.9.56",
+    "@types/react-dom": "^16.9.9",
+    "@types/react-icons": "^3.0.0",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/styled-components": "^5.1.4",
+    "@types/uniqid": "^5.2.0",
+    "@types/webpack-env": "^1.15.3",
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "file-loader": "^6.2.0",
+    "prettier": "^2.1.2",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.0.5"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "author": {
+    "name": "Dânio Filho",
+    "url": "https://github.com/daniofilho"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
